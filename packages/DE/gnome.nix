@@ -1,4 +1,4 @@
-{ lib, pkgs, user, wallpaper_source, ... }:
+{ lib, pkgs, user, is_nixos, wallpaper_source, ... }:
 
 {
   dconf = {
@@ -86,7 +86,7 @@
       # Custom shortcuts
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>Return";
-        command = "kgx";
+        command = if is_nixos then "kgx" else "gnome-terminal";
         name = "Terminal";
       };
       "org/gnome/settings-daemon/plugins/media-keys" = {

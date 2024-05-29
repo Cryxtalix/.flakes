@@ -23,9 +23,15 @@ We can still get a lot of the reproducibility of NixOS on other distros simply b
 `git clone https://github.com/Cryxtalix/NixOS-config && cd ~/NixOS-config`
 Or follow the link and download the files manually and unzip.
 
-8. Change the configuration to your liking, such as changing settings in /packages/git.nix, editing installed apps in /hosts/home/profile, or even creating new profiles! Be sure to add any new profiles in flake.nix.
+8. Change the configuration to your liking, such as changing settings in /packages/git.nix, editing installed apps in `/hosts/home/profile`, or even creating new profiles! Be sure to add any new profiles in flake.nix. If using sops-nix, place keyfile(e.g. keys.txt) in `.config/sops/age`.
 
 9. `git add -A` if you used git clone earlier and created any new files.
 
 10. Finally, install the configuration! 
 `home-manager switch -b backup --flake .#<your-home-profile>`
+
+## Setting up SSH and keys
+1. `chmod 700 .ssh`
+2. `touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys`
+3. `chown -R $(whoami) ~/.gnupg/`
+4. `find ~/.gnupg -type f -exec chmod 600 {} \; && find ~/.gnupg -type d -exec chmod 700 {} \;`
