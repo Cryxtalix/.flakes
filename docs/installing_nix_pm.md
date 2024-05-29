@@ -31,7 +31,6 @@ Or follow the link and download the files manually and unzip.
 `home-manager switch -b backup --flake .#<your-home-profile>`
 
 ## Setting up SSH and keys
-1. `chmod 700 .ssh`
-2. `touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys`
-3. `chown -R $(whoami) ~/.gnupg/`
-4. `find ~/.gnupg -type f -exec chmod 600 {} \; && find ~/.gnupg -type d -exec chmod 700 {} \;`
+1. Set up .gnupg permissions with: `find ~/.gnupg -type f -exec chmod 600 {} \; && find ~/.gnupg -type d -exec chmod 700 {} \;`
+2. Import public and private key for email and run: `gpg --import public.gpg && gpg --import private.gpg`.
+3. Set up .ssh permissions with: `chmod 700 .ssh && touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys`
