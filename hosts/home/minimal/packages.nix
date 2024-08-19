@@ -5,13 +5,13 @@
 
   home.packages = with pkgs; [
     distrobox
-    firefox
     podman
     unar
   ]
   ++
   (if is_nixos then with pkgs; [
     # Only when NixOS
+    firefox
   ]
   else with pkgs; [
     # Only when not NixOS

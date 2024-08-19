@@ -6,7 +6,7 @@
     userName = user.git.username;
     userEmail = user.git.email;
     signing = {
-      key = null;
+      key = "1DC1F77516767602";
       signByDefault = true;
       #gpgPath = "path to gpg executable";
     };

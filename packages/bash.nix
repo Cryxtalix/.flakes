@@ -8,6 +8,7 @@
       ll = "ls -al";
       c = "clear";
       neovim = "nvim";
+      v = "nvim";
       nix-flake-up = "(cd ${user.configDir} && nix flake update)";
       nv-watch = "watch -n1 nvidia-smi";
     } 
