@@ -9,7 +9,6 @@ with lib;
   };
 
   config = mkIf config.modules.sound.enable {
-    sound.enable = true;
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {

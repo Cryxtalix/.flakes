@@ -15,17 +15,17 @@ with lib;
       };
 
       environment.gnome.excludePackages = with pkgs; [
-        gnome-tour
-        nixos-render-docs
-        gnome.epiphany
-        gnome.geary
-        gnome.totem
-        gnome.yelp
         gnome.gnome-contacts
         gnome.gnome-maps
         gnome.gnome-music
         gnome.gnome-weather
-        gnome.simple-scan
+        gnome-tour
+        nixos-render-docs
+        epiphany
+        geary
+        totem
+        yelp
+        simple-scan
         snapshot
       ];
 

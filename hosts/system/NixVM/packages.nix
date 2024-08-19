@@ -35,6 +35,5 @@
 
   virtualisation = {
     podman.enable = true;
-    containers.cdi.dynamic.nvidia.enable = true;
   };
 }
