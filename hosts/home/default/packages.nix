@@ -11,7 +11,7 @@
     foliate
     gittyup
     gnome.gnome-boxes
-    gnome.gnome-tweaks
+    gnome-tweaks
     hexchat
     htop
     impression
