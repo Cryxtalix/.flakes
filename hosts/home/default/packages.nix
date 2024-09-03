@@ -10,7 +10,7 @@
     ffmpeg
     foliate
     gittyup
-    gnome.gnome-boxes
+    gnome-boxes
     gnome-tweaks
     hexchat
     htop
