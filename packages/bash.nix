@@ -10,6 +10,7 @@
       v = "vim";
       nix-flake-up = "(cd ${user.configDir} && nix flake update)";
       nv-watch = "watch -n1 nvidia-smi";
+      get-idf = ". $HOME/esp/esp-idf/export.sh";
     } 
     // 
     (if is_nixos then {
