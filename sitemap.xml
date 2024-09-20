@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://cryxtalix.github.io/NixOS-config/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+    <url>
+         <loc>https://cryxtalix.github.io/NixOS-config/bash_aliases/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+    <url>
+         <loc>https://cryxtalix.github.io/NixOS-config/code_doc/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+    <url>
+         <loc>https://cryxtalix.github.io/NixOS-config/git_server/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+    <url>
+         <loc>https://cryxtalix.github.io/NixOS-config/installing_nix_pm/</loc>
+         <lastmod>2024-09-20</lastmod>
+    </url>
+</urlset>

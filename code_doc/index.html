@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cryxtalix.github.io/NixOS-config/code_doc/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Code documentation - NixOS configuration docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Code documentation";
+        var mkdocs_page_input_path = "code_doc.md";
+        var mkdocs_page_url = "/NixOS-config/code_doc/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> NixOS configuration docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Code documentation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#nix-flake">Nix Flake</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nixos-configurations">NixOS Configurations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#home-manager-configurations">Home-manager Configurations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#development-environments">Development Environments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sops-nix">Sops-nix</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#github-workflows">GitHub Workflows</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mkdocs">MkDocs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#user-settings">User Settings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#wallpapers">Wallpapers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bash-aliases">Bash Aliases</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ssh-git-server">SSH Git Server</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bash_aliases/">Bash aliases</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installing_nix_pm/">Installing nix package manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../git_server/">Running an SSH git server</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">NixOS configuration docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Code documentation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="documentation">Documentation</h1>
+<h2 id="nix-flake">Nix Flake</h2>
+<p>File: <code>flake.nix</code>, <code>flake.lock</code></p>
+<p><code>flake.nix</code> describes the inputs and outputs of the project. Inputs list any files or repositories that the project downloads. Outputs list the results of the project, such as NixOS configurations, Home-Manager configurations and development environments.</p>
+<p><code>flake.lock</code> stores the hashes of inputs, ensuring that the specific package version used is identified. This essentially locks dependencies. If input hashes are specified in <code>flake.nix</code>, the hash in <code>flake.lock</code> will be overridden.</p>
+<h2 id="nixos-configurations">NixOS Configurations</h2>
+<p>File: <code>/hosts/system/[profile]/*.nix</code></p>
+<p>Describes the state of the system, including hardware settings and system packages.</p>
+<p><code>default.nix</code> imports modules from <code>modules/</code> folder and writes their configurations. <code>packages.nix</code> lists packages to be installed system wide and enables some system apps and services.</p>
+<p><code>hardware-configuration.nix</code> contains hardware configurations automatically generated by the system with <code>nixos-generate-config</code> and shouldn't need to be edited. When moving to a new machine, a new config can be generated and this file replaced.</p>
+<h2 id="home-manager-configurations">Home-manager Configurations</h2>
+<p>File: <code>hosts/home/[profile]/*.nix</code><br />
+Source: <a href="https://github.com/nix-community/home-manager">https://github.com/nix-community/home-manager</a></p>
+<p>Describes the state of the user environment, with the use of Home-manager. </p>
+<p><code>default.nix</code> imports package configurations from <code>packages/</code> folder and writes other home-manager configurations. <code>packages.nix</code> lists packages to be installed in the user environment.</p>
+<h2 id="development-environments">Development Environments</h2>
+<p>File: <code>dev-envs/*.nix</code></p>
+<p>Creates shells for development purposes, such as installing the required packages and creating shell aliases and scripts.</p>
+<h2 id="sops-nix">Sops-nix</h2>
+<p>File: <code>.sops.yaml</code>, <code>user/[profile]/secrets.yaml</code>, <code>modules/system.nix</code><br />
+Source: <a href="https://github.com/Mic92/sops-nix">https://github.com/Mic92/sops-nix</a></p>
+<p>Secret provisioning system that allows storing encrypted secrets in the repository.</p>
+<p><code>.sops.yml</code> configures the location of the public key and its owner. <code>secret.yaml</code> is where secrets are written and must be decrypted with the <code>sops</code> program and the secret key before editing. <code>system.nix</code> configures the location of the secrets.yaml source file, and the decrypting secret key.</p>
+<h2 id="github-workflows">GitHub Workflows</h2>
+<p>File: <code>.github/workflows/*.yml</code></p>
+<p>GitHub workflow configuration. Currently <code>test.yml</code> runs <code>nix flake check --no-build</code> each time the master branch recieves a commit, while the <code>ci.yml</code> deploys this GitHub Pages site.</p>
+<h2 id="mkdocs">MkDocs</h2>
+<p>File: <code>mkdocs.yml</code>, <code>docs/*.md</code>, <code>dev-envs/mkdocs.nix</code><br />
+Source: <a href="https://github.com/mkdocs/mkdocs">https://github.com/mkdocs/mkdocs</a></p>
+<p>Generates project documentation site with markdown.</p>
+<p><code>mkdocs.yml</code> configures the structure of the site. Markdown files in <code>docs/</code> folder are the pages. <code>mkdocs.nix</code> is the development environment for working with mkdocs.</p>
+<h2 id="user-settings">User Settings</h2>
+<p>File: <code>user/[profile]/*</code></p>
+<p>User settings are stored here under different profile names, such that new hostnames can be created for different users. Do not edit the files to change users. Add new folders and change the user_profile variable in nixosConfigurations and homeConfigurations.</p>
+<p><code>default.nix</code> stores user data. <code>secrets.yaml</code> stores encrypted secrets used by sops-nix. <code>users.nix</code> creates your user account user(or even multiple users).</p>
+<h2 id="wallpapers">Wallpapers</h2>
+<p>File: <code>user/[profile]/default.nix</code>, <code>flake.nix</code><br />
+Source: <a href="https://github.com/Cryxtalix/Wallpapers">https://github.com/Cryxtalix/Wallpapers</a></p>
+<p>Automatically adds wallpapers to GNOME desktop environment from personal GitHub repo. <code>default.nix</code> stores the name of the wallpaper to be used(needs to present in the repo). <code>flake.nix</code> contains source url of the wallpaper repo, and could be changed to a different wallpaper source.</p>
+<h2 id="bash-aliases">Bash Aliases</h2>
+<p>File: <code>packages/bash.nix</code>, <code>dev-envs/*.nix</code></p>
+<p>Convenient bash aliases to shorten long commands.</p>
+<p>Aliases are in <code>bash.nix</code> shellAliases and initExtra sections will be always be active. Aliases in <code>dev-envs/*.nix</code> shellHook sections will only be active when the corresponding development environment is activated.</p>
+<h2 id="ssh-git-server">SSH Git Server</h2>
+<p>File: <code>modules/git-daemon.nix</code>, <code>keys/*</code></p>
+<p>Creates an SSH git server that accepts public keys from <code>keys/</code> folder. Module has to be imported to a nixos configuration and enabled.</p>
+<p><a href="../git_server/">Read here for detailed instructions</a></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../bash_aliases/" class="btn btn-neutral float-right" title="Bash aliases">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../bash_aliases/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://cryxtalix.github.io/NixOS-config/installing_nix_pm/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Installing nix package manager - NixOS configuration docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Installing nix package manager";
+        var mkdocs_page_input_path = "installing_nix_pm.md";
+        var mkdocs_page_url = "/NixOS-config/installing_nix_pm/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> NixOS configuration docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../code_doc/">Code documentation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bash_aliases/">Bash aliases</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Installing nix package manager</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-ssh-and-keys">Setting up SSH and keys</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../git_server/">Running an SSH git server</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">NixOS configuration docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Installing nix package manager</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="installing-nix-package-manager-on-another-distro">Installing nix package manager on another distro</h1>
+<p>We can still get a lot of the reproducibility of NixOS on other distros simply by installing Nix, not as the operating system but as a third party package manager. Together with <strong>Home Manager</strong>, we can configure almost any user apps and make any changes to files and folders in the home folder.</p>
+<ol>
+<li>
+<p>Install the Nix package manager with install script from <a href="https://zero-to-nix.com/start/install">https://zero-to-nix.com/start/install</a>:
+    <code>curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install</code>.</p>
+</li>
+<li>
+<p>Restart shell and add home-manager channel:
+<code>nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager</code></p>
+</li>
+<li>
+<p>Update nix-channels: 
+<code>nix-channel --update</code></p>
+</li>
+<li>
+<p>Install home-manager: 
+<code>nix-shell '&lt;home-manager&gt;' -A install</code></p>
+</li>
+<li>
+<p>Create folder: 
+<code>mkdir ~/.config/nix</code></p>
+</li>
+<li>
+<p>Create config file: 
+<code>echo "experimental-features = nix-command flakes" &gt;&gt; ~/.config/nix/nix.conf</code></p>
+</li>
+<li>
+<p>Download this configuration: 
+<code>git clone https://github.com/Cryxtalix/NixOS-config &amp;&amp; cd ~/NixOS-config</code>
+Or follow the link and download the files manually and unzip.</p>
+</li>
+<li>
+<p>Change the configuration to your liking, such as changing settings in /packages/git.nix, editing installed apps in <code>/hosts/home/profile</code>, or even creating new profiles! Be sure to add any new profiles in flake.nix. If using sops-nix, place keyfile(e.g. keys.txt) in <code>.config/sops/age</code>.</p>
+</li>
+<li>
+<p><code>git add -A</code> if you used git clone earlier and created any new files.</p>
+</li>
+<li>
+<p>Finally, install the configuration! 
+<code>home-manager switch -b backup --flake .#&lt;your-home-profile&gt;</code></p>
+</li>
+</ol>
+<h2 id="setting-up-ssh-and-keys">Setting up SSH and keys</h2>
+<ol>
+<li>Set up .gnupg permissions with: <code>find ~/.gnupg -type f -exec chmod 600 {} \; &amp;&amp; find ~/.gnupg -type d -exec chmod 700 {} \;</code></li>
+<li>Import public and private key for email and run: <code>gpg --import public.gpg &amp;&amp; gpg --import private.gpg</code>.</li>
+<li>Set up .ssh permissions with: <code>chmod 700 .ssh &amp;&amp; touch .ssh/authorized_keys &amp;&amp; chmod 600 .ssh/authorized_keys</code></li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../bash_aliases/" class="btn btn-neutral float-left" title="Bash aliases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../git_server/" class="btn btn-neutral float-right" title="Running an SSH git server">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../bash_aliases/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../git_server/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
